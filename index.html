@@ -29,10 +29,14 @@
                 <ul>
                     <li v-for ="detial in detials"> {{detial}}
                 </ul>
-                <div v-for= "variant in variants" :key="variant.variantID">
-                    <p>{{variant.variantColor}} </p>
+                <div v-for= "variant in variants"
+                     :key="variant.variantID"
+                     class="color-box"
+                     :style="{backgroundColor:variant.variantColor}"
+                     @mouseover="updateProduct(variant.image)">
                 </div>
-                <button v-on:click="addToCart">Add to cart</button>
+                <button v-on:click="addToCart"
+                :disabled="!inStock">Add to cart</button>
                 <div class="cart">Cart({{cart}})</div>
             </div>
 
