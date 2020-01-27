@@ -22,21 +22,21 @@
             </div>
 
             <div class="product-info">
-                <h1>{{product}}</h1>
-                <p v-if="inventory>10"> In Stock</p>
-                <p v-else-if="inventory <= 10 && inventory > 0"> Almost Finished</p>
+                <h1>{{title}}</h1>
+                <p v-if="inStock"> In Stock</p>
                 <p v-else>Out of Stock</p>
                 <ul>
                     <li v-for ="detial in detials"> {{detial}}
                 </ul>
-                <div v-for= "variant in variants"
+                <div v-for= "(variant, index) in variants"
                      :key="variant.variantID"
                      class="color-box"
                      :style="{backgroundColor:variant.variantColor}"
-                     @mouseover="updateProduct(variant.image)">
+                     @mouseover="updateProduct(index)">
                 </div>
                 <button v-on:click="addToCart"
-                :disabled="!inStock">Add to cart</button>
+                :disabled="!inStock"
+                :class="{disabledButton: !inStock}">Add to cart</button>
                 <div class="cart">Cart({{cart}})</div>
             </div>
 

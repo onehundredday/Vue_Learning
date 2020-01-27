@@ -1,22 +1,24 @@
 var app = new Vue({
     el: '#app',
     data: {
+        brand: 'Vue Mystery',
         product: 'Socks',
-        image: 'vmSocks-green-onWhite.jpg',
+        selectedVariant: 0,
         inventory: 11,
-        inStock: false,
         detials: ["80% cotton", "20% polyester", "Gender-neutral"],
         variants: [
             {
                 variantID: 2234,
                 variantColor: "green",
-                image: 'vmSocks-green-onWhite.jpg'
+                image: 'vmSocks-green-onWhite.jpg',
+                quantity: 10
 
             },
             {
                 variantID: 2235,
                 variantColor: "blue",
-                image: 'vmSocks-blue-onWhite.jpg'
+                image: 'vmSocks-blue-onWhite.jpg',
+                quantity: 0
 
             }
         ],
@@ -28,8 +30,19 @@ var app = new Vue({
             this.cart += 1
 
         },
-        updateProduct: function(image) {
-            this.image = image
+        updateProduct: function(index) {
+            this.selectedVariant = index
         }, 
+    },
+    computed: {
+        title() {
+            return this.brand + ' '  + this.product
+        },
+        image() {
+            return this.variants[this.selectedVariant].image
+        },
+        inStock() {
+            return this.variants[this.selectedVariant].quantity
+        },
     },
 })
